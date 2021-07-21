@@ -48,9 +48,9 @@ class Resolver
 
 		curl_close( $ch );
 
-		if ( $response === false ) {
-			throw new CurlException( $error_message, $error_code );
-		}
+		# Error responses will now also be cached to prevent sending repeated requests
+		# to a service that is already experiencing some kind of failure.
+		# Adding more load to a struggeling service isn't helping.
 
 		return $response;
 	}
